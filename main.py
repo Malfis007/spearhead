@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-import socket
 import os
-#from psutil import process_iter
-from signal import SIGTERM
 
 # check for open ports
 def portScan():
