@@ -19,8 +19,8 @@ while true; do
 		# pipe that into grep and grep for local connections
 		# pipe that into awk and check if the process is ssh
 		# pipe that into ss and kill
-		scan) w | grep -v localhost | awk 'match($8,"sshd:"){print $3} match($8,"w"){print $3}' ;; # scan for ssh connections
-		kill) w | grep -v localhost | awk 'match($8,"sshd:"){print $3} match($8,"w"){print $3}' | ss -K ;; # kill ssh connections
+		scan) w | grep -v localhost | awk 'match($8,"sshd:"){print $3} match($8,"w"){print $3} match($8,"-bash"){print $3}' | awk 'match($1,/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/){print $1}' ;; # scan for ssh connections
+		kill) w | grep -v localhost | awk 'match($8,"sshd:"){print $3} match($8,"w"){print $3} match($8,"-bash"){print $3}' | awk 'match($1,/[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/){print $1}' | ss -K ;; # kill ssh connections
 		exit) exit 0 ;;
 		*) printUsage ;;
 	esac
